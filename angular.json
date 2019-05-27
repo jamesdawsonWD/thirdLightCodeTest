@@ -27,7 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "lib/sass/index.scss"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -89,7 +89,7 @@
             "scripts": [],
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "assets"
             ]
           }
         },

@@ -1,0 +1,50 @@
+// fargo.config
+//
+// json (with single-line comments) config settings file 
+//
+// these settings will be overriden by command line args
+{
+	// the dir where the web app will live
+	"www":     "www",
+
+	// where the files you want to serve are
+	"dir":     "dir",
+
+	// metadata editing on/
+	"edit":    true,
+
+	// read exif data from files that contain it
+	//"exif":    true,
+
+	// verbose loggin on
+	// "verbose" : true,
+
+	// change the http port
+	"port": "3001",
+
+	// thumb image sizes width x height
+	// "thumb": "150x150",
+
+	// thumb image sizes width x height
+	// "preview" : "640x640",
+
+	// which metadata fields to search
+	// "search"  : ["title", "description", "keywords"],
+
+	// autotag settings
+	"autotag": {
+
+		// turn it on
+		"tag": true,
+
+		// change the thumb size to send to clarifai "512x512" is default
+		// "size": "512x512",
+		
+		// clarifai API key
+		"key": "cb5421ab9b2549269646756552d48c4c"
+
+		// change the threshold (though the default is prettu good)
+		// "threshold":  0.915
+
+	}
+}
