@@ -18,7 +18,7 @@ export class HTTPservice {
     ) {}
 
     public getAllImages(): Observable<Image[]> {
-        return this.http.get(`${this.serverUrl}/images`).pipe(
+        return this.http.get(`${this.serverUrl}/dir/images`).pipe(
           map((res: Response<AllImages>) => res.data.files),
           catchError(e => throwError(e))
         );

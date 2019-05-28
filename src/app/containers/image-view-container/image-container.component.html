@@ -1,4 +1,6 @@
-<article *ngFor="let image of allImages$ | async">
-<img src="{{serverUrl + getThumbNail(image)}}"/>
-{{serverUrl + getThumbNail(image)}}
-</article>
+<div class="responsive-grid">
+    <article class="card" *ngFor="let image of allImages$ | async">
+ 
+    </article>
+
+</div>

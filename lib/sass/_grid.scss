@@ -1,0 +1,23 @@
+.responsive-grid {
+    display:grid;
+    grid-template-rows: auto;
+
+    @include sm {
+        grid-template-columns: 1fr;
+        grid-gap: 40px 0px;
+    }
+
+    @include md {
+        grid-template-columns: 1fr;
+        grid-gap: 40px 10px;
+    }
+    @include lg {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 40px;
+    }
+    @include xl {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 40px;
+    }
+}
+

@@ -23,7 +23,7 @@
 	"port": "3001",
 
 	// thumb image sizes width x height
-	// "thumb": "150x150",
+	"thumb": "450x250",
 
 	// thumb image sizes width x height
 	// "preview" : "640x640",
