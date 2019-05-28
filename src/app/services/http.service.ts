@@ -3,8 +3,10 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 
 import { Subject, throwError, Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, filter } from 'rxjs/operators';
 import { environment } from '@environments/environment';
+import { Image, AllImages, Response } from '@lib/models';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +17,9 @@ export class HTTPservice {
         private http: HttpClient
     ) {}
 
-    public getAllImages(): Observable<any> {
-        return this.http.get(`${this.serverUrl}/dir/images`).pipe(
-          map(res => res),
+    public getAllImages(): Observable<Image[]> {
+        return this.http.get(`${this.serverUrl}/images`).pipe(
+          map((res: Response<AllImages>) => res.data.files),
           catchError(e => throwError(e))
         );
       }
