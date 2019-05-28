@@ -1,1 +1,4 @@
-{{allImages$ | async | json}}
+<article *ngFor="let image of allImages$ | async">
+<img src="{{serverUrl + getThumbNail(image)}}"/>
+{{serverUrl + getThumbNail(image)}}
+</article>
