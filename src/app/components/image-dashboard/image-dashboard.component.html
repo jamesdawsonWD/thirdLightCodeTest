@@ -1,0 +1,10 @@
+<div class="responsive-grid">
+  <app-thumb-card-view 
+    [routerLink]="[appendPreview(image.name)]" 
+    [thumb]="serverUrl + getThumbNail(image)"
+    [title]="image.name"
+    (click)="setCurrentImage(image)" 
+    class="card"
+    *ngFor="let image of allImages$ | async">
+  </app-thumb-card-view >
+</div>

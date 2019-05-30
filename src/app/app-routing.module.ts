@@ -7,7 +7,7 @@ const routes: Routes = [
    */
   {
     path: '', children: [
-      { path: '', loadChildren: './containers/image-view-container/image-container.module#ImageContainerModule' },
+      { path: '', loadChildren: './containers/dashboard-container/dashboard-container.module#DashboardContainerModule' },
     ]
   },
   { path: '**', redirectTo: ''},
