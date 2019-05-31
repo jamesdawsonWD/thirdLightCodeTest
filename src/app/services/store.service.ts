@@ -9,18 +9,25 @@ export class StoreService {
     readonly serverUrl = environment.serverUrl;
     private currentImage: Image;
     private allImages$: Observable<Image[]> = this.http.getAllImages();
+    private previewSize = environment.preview;
     constructor(private http: HTTPservice) {}
 
-    get getCurrentImage(): Image {
+    public getCurrentImage(): Image {
         return this.currentImage;
     }
-    get getAllImages(): Observable<Image[]> {
+    public getAllImages(): Observable<Image[]> {
         return this.allImages$;
     }
-    set setCurrentImage(image: Image) {
+    public getpreviewSize(): string{
+        return this.previewSize;
+    }
+    public setpreviewSize(size: string) {
+        this.previewSize = size;
+    }
+    public setCurrentImage(image: Image) {
         this.currentImage = image;
     }
-    set setAllImages(images: Observable<Image[]> ) {
+    public setAllImages(images: Observable<Image[]> ) {
         this.allImages$ = images;
     }
 }

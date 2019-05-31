@@ -1,3 +1,7 @@
-<p>
-  image-preview works!
-</p>
+<div class="container" (click)="addNewComment($event)">
+  <div class="image-container">
+    {{image |json}}
+    <img [src]="serverUrl + image.links.preview" [width]="" [height]="">
+  </div>
+  <canvas></canvas>
+</div>

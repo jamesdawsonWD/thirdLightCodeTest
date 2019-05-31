@@ -20,6 +20,7 @@
     ],
     "paths": {
       "@lib/*": ["lib/*"],
+      "@server/*": ["server/*"],
       "@core/*": ["src/app/*"],
       "@environments/*": ["src/environments/*"],
 

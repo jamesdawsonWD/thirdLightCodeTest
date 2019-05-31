@@ -17,8 +17,8 @@ import { StoreService } from '@core/services/store.service';
 
 // Routes
 const routes: Routes = [
-  { path: '', component: ImageDashboardComponent },
-  { path: 'preview/:name', component: ImagePreviewComponent },
+  { path: '',               component: ImageDashboardComponent },
+  { path: 'preview/:name',  component: ImagePreviewComponent },
 ];
 
 @NgModule({

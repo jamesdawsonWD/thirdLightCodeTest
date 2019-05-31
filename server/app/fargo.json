@@ -26,7 +26,7 @@
 	"thumb": "450x250",
 
 	// thumb image sizes width x height
-	// "preview" : "640x640",
+	"preview" : "720x720",
 
 	// which metadata fields to search
 	// "search"  : ["title", "description", "keywords"],

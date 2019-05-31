@@ -10,13 +10,13 @@ import { Image } from '@lib/models';
 })
 export class ImageDashboardComponent implements OnInit {
   public serverUrl: string = this.store.serverUrl;
-  public allImages$: Observable<Image[]> = this.store.getAllImages;
-  
+  public allImages$: Observable<Image[]> = this.store.getAllImages();
+
   // functions
   public getThumbNail = getImageThumbNail;
   public appendPreview = (s: string) => `/preview/${s}/`;
 
-  constructor(private store: StoreService) { }
+  constructor(public store: StoreService) { }
 
   ngOnInit() {
   }

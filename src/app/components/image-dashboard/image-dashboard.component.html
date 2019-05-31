@@ -3,7 +3,7 @@
     [routerLink]="[appendPreview(image.name)]" 
     [thumb]="serverUrl + getThumbNail(image)"
     [title]="image.name"
-    (click)="setCurrentImage(image)" 
+    (click)="store.setCurrentImage(image)" 
     class="card"
     *ngFor="let image of allImages$ | async">
   </app-thumb-card-view >
