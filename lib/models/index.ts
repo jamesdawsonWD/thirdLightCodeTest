@@ -20,11 +20,11 @@ export interface Image {
     modTime: Date;
     kind: string;
     fileType: string;
-    imageInfor: ImageInfo;
+    imageInfo: ImageInfo;
     exIf: boolean | null;
     metaData: any;
     links: ImageLinks;
-    comments: ImageComment;
+    comments: ImageComment[];
   }
 
 export interface ImageComment {

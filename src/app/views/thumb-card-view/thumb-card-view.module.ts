@@ -1,9 +1,9 @@
-import          {NgModule} from '@angular/core';
-import          {CommonModule} from '@angular/common';
-import          {ThumbCardViewComponent} from './thumb-card-view.component';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { ThumbCardViewComponent } from "./thumb-card-view.component";
 @NgModule({
-  imports:      [CommonModule],
+  imports: [CommonModule],
   declarations: [ThumbCardViewComponent],
-  exports:      [ThumbCardViewComponent],
+  exports: [ThumbCardViewComponent]
 })
-export class ThumbCardViewModule { }
+export class ThumbCardViewModule {}

@@ -1,7 +1,12 @@
-<div class="container" (click)="addNewComment($event)">
-  <div class="image-container">
-    {{image |json}}
-    <img [src]="serverUrl + image.links.preview" [width]="" [height]="">
+<div class="image-preview" (click)="addNewComment('dsf')">
+  <div class="image-preview__canvas">
+    <canvas></canvas>
+    <view-image-info [image]="image"></view-image-info>
   </div>
-  <canvas></canvas>
+  <ng-container *ngIf="checkObjectProps(['comments'])(image) && image.comments.length > 0; else noComments" class="image-preview__comments">
+    <view-list-comments *ngFor="let comment of image.comments" [comment]="comment"></view-list-comments>
+  </ng-container>
+  <ng-template #noComments>
+    <h1>NO COMMENTS</h1>
+  </ng-template>
 </div>

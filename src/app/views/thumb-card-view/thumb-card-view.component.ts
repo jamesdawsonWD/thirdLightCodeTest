@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-thumb-card-view',
+  selector: 'view-thumb-card',
   templateUrl: './thumb-card-view.component.html',
 })
 export class ThumbCardViewComponent {

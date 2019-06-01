@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImageDashboardComponent } from './image-dashboard.component';
+import { ListCommentsComponent } from './list-comments.component';
 
-describe('ImageDashboardComponent', () => {
-  let component: ImageDashboardComponent;
-  let fixture: ComponentFixture<ImageDashboardComponent>;
+describe('ListCommentsComponent', () => {
+  let component: ListCommentsComponent;
+  let fixture: ComponentFixture<ListCommentsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImageDashboardComponent ]
+      declarations: [ ListCommentsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImageDashboardComponent);
+    fixture = TestBed.createComponent(ListCommentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
