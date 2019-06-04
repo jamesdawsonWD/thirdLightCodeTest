@@ -13,8 +13,10 @@ export class ImageInformationComponent{
   private serverUrl: string = this.store.serverUrl;
   public src: string;
 
-  constructor(private store: StoreService) {
-    console.log(this.image);
+  constructor(
+    private store: StoreService,
+    ) {
     this.src = this.serverUrl + this.image.getLinks().preview;
   }
+
 }

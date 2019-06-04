@@ -1,7 +1,6 @@
 .image-dashboard {
     display:grid;
     grid-template-rows: auto;
-
     @include sm {
         grid-template-columns: 1fr;
         grid-gap: 40px 0px;
@@ -13,11 +12,21 @@
     }
     @include lg {
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: 40px;
+        grid-gap: 100px 70px;
     }
     @include xl {
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: 40px;
+        grid-gap: 100px 70px ;
+    }
+    &__card {
+        transition: 0.3s;
+        &:hover {
+            transform: translatey(10px);
+        }
+    }
+    &__thumb {
+        margin:auto;
+        padding: 20px;
     }
 }
 

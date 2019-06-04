@@ -17,6 +17,9 @@ import { CommentModule } from "@core/views/comment/comment.module";
 import { StoreService } from "@core/services/store.service";
 import { ImageInformationComponent } from '../image-information/image-information.component';
 
+// Imports
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 // Routes
 const routes: Routes = [
   { path: "", component: ImageDashboardComponent },
@@ -27,6 +30,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    NgbModule,
     CommonModule,
     ThumbCardViewModule,
     ListCommentsModule,

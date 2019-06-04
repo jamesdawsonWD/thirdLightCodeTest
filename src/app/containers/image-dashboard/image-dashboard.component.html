@@ -4,7 +4,7 @@
     [thumb]="serverUrl + getThumbNail(image)"
     [title]="image.name"
     (click)="thumbImageClick(image)" 
-    class="card pointer"
+    class="card image-dashboard__card pointer"
     *ngFor="let image of allImages$ | async">
   </view-thumb-card>
 </div>

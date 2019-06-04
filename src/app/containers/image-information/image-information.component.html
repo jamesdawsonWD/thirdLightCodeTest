@@ -3,18 +3,24 @@
 <div class="image-information">
   <div class="image-information__header">
     <a [routerLink]="['']" ><h3>Back</h3></a>
+    <img class="pointer" src="assets/pencil.svg"(click)="open(content)">
   </div>
   <div class="image-information__image">
     <img src="{{src}}"/>
   </div>
-  <view-image-info class="image-information__imageInfo"   [image]="image"></view-image-info>
-  
-  <view-list-comments 
-    *ngIf="checkObjectProps(['comments'])(image) && image.comments.length > 0; else noComments" 
-    class="image-information__comments" 
-    [comments]="image.comments">
-  </view-list-comments>
-  <ng-template #noComments>
-    <h1>NO COMMENTS</h1>
-  </ng-template>
+  <view-image-info class="image-information__imageInfo" [image]="image"></view-image-info>
 </div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-image-preview></app-image-preview>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>
