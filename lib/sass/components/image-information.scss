@@ -1,0 +1,68 @@
+.image-information {
+    display:grid;
+    min-height: 100vh;
+    grid-template-areas:
+    "header header header"
+    "image image image"
+    "imageInfo imageInfo imageInfo"
+    "comments comments tags";
+
+    &__header {
+        margin: auto;
+        margin-top:50px;
+        width: 70%;
+        grid-area: header;
+        transition: 0.4s ease;
+        a:hover {
+            display:flex;
+            color: black;   
+
+        }
+        h1 {
+            align-self: center;
+            justify-self: center;
+        }
+        img {
+            height: 32px;
+            width: 32px;
+        }
+
+    }
+    &__image {
+        margin: auto;
+        padding: 100px 0;
+        width: 100%;
+        grid-area: image;
+        text-align:center;
+        img {
+            margin: auto 0;
+        }
+    }
+    &__imageInfo {
+        margin: auto;
+        width: 70%;
+        grid-area: imageInfo;
+            h5 {
+                padding: 10px 10px;
+                display: flex;
+                color: var(--main-secondary-colour);
+                border-top:1px solid var(--main-secondary-colour);
+                align-items: center;
+                label {
+                    text-transform: uppercase;
+                    flex: 50%;
+                    margin: 0;
+                }
+                span {
+                    flex: 50%;
+                    text-align:right;
+                }
+            }
+    }
+    &__comments {
+        grid-area: comments;
+    }
+    &__comments {
+        grid-area: tags;
+    }
+}

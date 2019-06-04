@@ -1,11 +1,11 @@
-<div class="image-dashboard">
-    <view-thumb-card
-      [routerLink]="[appendPreview(image.name)]" 
-      [thumb]="serverUrl + getThumbNail(image)"
-      [title]="image.name"
-      (click)="store.setCurrentImage(image)" 
-      class="card"
-      *ngFor="let image of allImages$ | async">
-    </view-thumb-card>
-  </div>
+<div class="image-dashboard dashboard-container main">
+  <view-thumb-card
+    [routerLink]="[appendPreview(image.name)]" 
+    [thumb]="serverUrl + getThumbNail(image)"
+    [title]="image.name"
+    (click)="thumbImageClick(image)" 
+    class="card pointer"
+    *ngFor="let image of allImages$ | async">
+  </view-thumb-card>
+</div>
   

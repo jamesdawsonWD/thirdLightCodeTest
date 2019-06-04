@@ -11,7 +11,8 @@ export class StoreService {
     private currentImage: ImageTL;
     private allImages$: Observable<Image[]> = this.http.getAllImages();
     private previewSize = environment.preview;
-    constructor(private http: HTTPservice) {}
+    constructor(private http: HTTPservice) {
+    }
 
     public getCurrentImage(): ImageTL {
         return this.currentImage;
@@ -24,14 +25,26 @@ export class StoreService {
     }
     public setpreviewSize(size: string) {
         this.previewSize = size;
-        return this;
     }
     public setCurrentImage(image: Image) {
         this.currentImage.setImage(image);
-        return this;
     }
     public setAllImages(images: Observable<Image[]> ) {
         this.allImages$ = images;
-        return this;
+    }
+    public createNewImage(image: Image) {
+        this.currentImage = new ImageTL(
+            image.name,
+            image.size,
+            image.modTime,
+            image.kind,
+            image.fileType,
+            image.imageInfo,
+            image.exIf,
+            image.metaData,
+            image.links,
+            [],
+        );
+        console.log(this.currentImage);
     }
 }

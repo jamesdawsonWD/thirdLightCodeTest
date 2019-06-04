@@ -1,6 +1,9 @@
-<div *ngIf="iamge" class="image-info">
-  <label>Name:</label> <span>{{image.name}}</span>
-  <label>Size:</label> <span>{{image.size}}</span>
-  <label>Size:</label> <span>{{image.size}}</span>
-
+<div *ngIf="image" class="image-info">
+  <h5><label>Name:</label> <span>{{image.name}}</span></h5>
+  <h5><label>Size:</label> <span>{{image.size}}</span></h5>
+  <h5><label>ModTime:</label> <span>{{image.modTime}}</span></h5>
+  <h5><label>Kind:</label> <span>{{image.kind}}</span></h5>
+  <h5><label>ImageInfo:</label> <span>{{image.imageInfo}}</span></h5>
+  <h5><label>ExIf:</label> <span>{{image.edIf}}</span></h5>
+  <h5><label>MetaData:</label> <span>{{image.metaData}}</span></h5>
 </div>

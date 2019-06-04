@@ -1,4 +1,17 @@
 @import './reset.scss';
+@import '/colours';
 @import './breakpoints';
 @import './components/index.scss';
 @import './containers';
+@import './typography.scss';
+@import './utils.scss';
+
+body {
+    color: black;
+    background: var(--main-bg-colour);
+    font-family: 'Open Sans', sans-serif;
+}
+
+a {
+    cursor: pointer;
+}

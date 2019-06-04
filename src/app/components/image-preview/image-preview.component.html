@@ -1,11 +1,11 @@
-<div class="image-preview" (click)="addNewComment('dsf')">
+<div class="image-preview" >
   <div class="image-preview__canvas">
-    <canvas></canvas>
+    <canvas (click)="addNewComment($event, 'Test comment', 'James', image)"></canvas>
     <view-image-info [image]="image"></view-image-info>
   </div>
-  <ng-container *ngIf="checkObjectProps(['comments'])(image) && image.comments.length > 0; else noComments" class="image-preview__comments">
-    <view-list-comments *ngFor="let comment of image.comments" [comment]="comment"></view-list-comments>
-  </ng-container>
+  <div>
+    <view-list-comments *ngIf="checkObjectProps(['comments'])(image) && image.comments.length > 0; else noComments" class="image-preview__comments" [comments]="image.comments"></view-list-comments>
+  </div>
   <ng-template #noComments>
     <h1>NO COMMENTS</h1>
   </ng-template>

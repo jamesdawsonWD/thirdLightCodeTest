@@ -2,17 +2,29 @@ import { ImageInfo, ImageLinks, ImageComment, Image } from "@lib/models";
 
 export class ImageTL {
   constructor(
-    private name: string,
-    private size: number,
-    private modTime: Date,
-    private kind: string,
-    private fileType: string,
-    private imageInfo: ImageInfo,
-    private exIf: boolean | null,
-    private metaData: any,
-    private links: ImageLinks,
-    private comments: ImageComment[] = []
-  ) {}
+    private name: string = '',
+    private size: number = 0,
+    private modTime: Date  = new Date(),
+    private kind: string =  '',
+    private fileType: string =  '',
+    private imageInfo: ImageInfo = {
+      width: 0,
+      height: 0,
+      created: new Date(),
+      location: '',
+      autotags: [],
+    },
+    private exIf: boolean | null = false,
+    private metaData: any =  '',
+    private links: ImageLinks = {
+      dir: '',
+      thumb: '',
+      preview: '',
+      original: '',
+      metadata: ''
+    },
+    private comments: ImageComment[] = [],
+  ) { }
 
   public getName(): string {
     return this.name;
@@ -91,14 +103,13 @@ export class ImageTL {
     this.setFileType(image.fileType);
     this.setImageInfo(image.imageInfo);
     this.setModTime(image.modTime);
-    this.setComments(image.comments);
+    this.setComments(image.comments || []);
     this.setMetaData(image.metaData);
     this.setKind(image.kind);
     this.setLinks(image.links);
     return this;
   }
-  public addComment(comment: ImageComment): ImageTL {
+  public addComment(comment: ImageComment) {
     this.comments.push(comment);
-    return this;
   }
 }

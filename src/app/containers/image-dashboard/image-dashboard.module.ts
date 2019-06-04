@@ -9,21 +9,33 @@ import { ImagePreviewComponent } from "@core/components/image-preview/image-prev
 
 // Views
 import { ThumbCardViewModule } from "@core/views/thumb-card-view/thumb-card-view.module";
-import { ListCommentsModule } from '@core/views/list-comments/list-comments.module';
-import { ImageInfoModule } from '@core/views/image-info/image-info.module';
+import { ListCommentsModule } from "@core/views/list-comments/list-comments.module";
+import { ImageInfoModule } from "@core/views/image-info/image-info.module";
+import { CommentModule } from "@core/views/comment/comment.module";
 
 // Services
 import { StoreService } from "@core/services/store.service";
+import { ImageInformationComponent } from '../image-information/image-information.component';
 
 // Routes
 const routes: Routes = [
   { path: "", component: ImageDashboardComponent },
-  { path: "preview/:name", component: ImagePreviewComponent }
+  { path: "preview/:name", component: ImageInformationComponent },
+
+
 ];
 
 @NgModule({
-  imports: [CommonModule, ThumbCardViewModule, ListCommentsModule,ImageInfoModule, RouterModule.forChild(routes)],
-  declarations: [ImageDashboardComponent, ImagePreviewComponent],
-  providers: [StoreService]
+  imports: [
+    CommonModule,
+    ThumbCardViewModule,
+    ListCommentsModule,
+    ImageInfoModule,
+    CommentModule,
+    RouterModule.forChild(routes)
+  ],
+  declarations: [ImageDashboardComponent, ImagePreviewComponent, ImageInformationComponent],
+  providers: [StoreService],
+  bootstrap: [ImageDashboardComponent]
 })
 export class ImageDashboardModule {}

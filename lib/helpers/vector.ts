@@ -1,18 +1,3 @@
-
-export const add = (a: Vector, b: Vector): Vector => new Vector(a.x + b.x, a.y + b.y);
-export const sub = (a: Vector, b: Vector): Vector => new Vector(a.x - b.x, a.y - b.y);
-export const scale = (v: Vector, s: number): Vector => v.clone().scale(s);
-export const randon = (): Vector => new Vector(
-    Math.random() * 2 - 1,
-    Math.random() * 2 - 1
-);
-export const distanceToAndAngle = (a: Vector, b: Vector): { distance: number, angle: number } => {
-    return {
-        distance: a.distanceTo(b),
-        angle: a.angleTo(b)
-    }
-}
-
 export class Vector {
     constructor(
         public x: number,
@@ -83,14 +68,5 @@ export class Vector {
     }
     public toString(): string {
         return '(x:' + this.x + ', y:' + this.y + ')';
-    }
-}
-
-export class ToVector{
-    public magnitudeX: number;
-    public magnitudeY: number;
-    constructor(magnitude: number, angle: number) {
-        this.magnitudeX = magnitude * Math.cos(angle);
-        this.magnitudeY = magnitude * Math.sin(angle);
     }
 }

@@ -8,7 +8,7 @@ import { Image } from '@lib/models';
   selector: 'app-image-dashboard',
   templateUrl: './image-dashboard.component.html',
 })
-export class ImageDashboardComponent implements OnInit {
+export class ImageDashboardComponent {
   public serverUrl: string = this.store.serverUrl;
   public allImages$: Observable<Image[]> = this.store.getAllImages();
 
@@ -18,7 +18,9 @@ export class ImageDashboardComponent implements OnInit {
 
   constructor(public store: StoreService) { }
 
-  ngOnInit() {
+  public thumbImageClick(image: Image) {
+    console.log(image);
+    this.store.createNewImage(image);
   }
 
 }

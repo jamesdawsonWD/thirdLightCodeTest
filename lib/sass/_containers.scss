@@ -1,7 +1,28 @@
 .site-container {
-    margin: 100px;
+    display: grid;
+    overflow-x:hidden;
+    grid-template-areas:
+        "nav main"
+        "nav main"
+        "nav main";
+
+    grid-template-columns: 450px auto;
+    grid-template-rows: 1fr auto;
+
+    height: 100vh;
+
+    @include lg {
+        grid-template-areas:
+        "main main"
+        "main main"
+        "main main";
+    }
+
 }
 
+.dashboard-container {
+    margin: 50px;
+}
 .card {
     justify-content: center;
     align-content: center;

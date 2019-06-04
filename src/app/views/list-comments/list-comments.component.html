@@ -1,3 +1,1 @@
-<p>
-  {{comment | json}}
-</p>
+<view-comment *ngFor="let comment of comments" [comment]="comment"></view-comment>

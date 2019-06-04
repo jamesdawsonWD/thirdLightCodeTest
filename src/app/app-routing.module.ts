@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ImagePreviewComponent } from './components/image-preview/image-preview.component';
 
 const routes: Routes = [
   /**

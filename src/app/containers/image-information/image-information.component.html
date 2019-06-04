@@ -1,0 +1,20 @@
+
+
+<div class="image-information">
+  <div class="image-information__header">
+    <a [routerLink]="['']" ><h3>Back</h3></a>
+  </div>
+  <div class="image-information__image">
+    <img src="{{src}}"/>
+  </div>
+  <view-image-info class="image-information__imageInfo"   [image]="image"></view-image-info>
+  
+  <view-list-comments 
+    *ngIf="checkObjectProps(['comments'])(image) && image.comments.length > 0; else noComments" 
+    class="image-information__comments" 
+    [comments]="image.comments">
+  </view-list-comments>
+  <ng-template #noComments>
+    <h1>NO COMMENTS</h1>
+  </ng-template>
+</div>
