@@ -1,26 +1,59 @@
-
-
 <div class="image-information">
   <div class="image-information__header">
     <a [routerLink]="['']" ><h3>Back</h3></a>
-    <img class="pointer" src="assets/pencil.svg"(click)="open(content)">
+    <img class="pointer" src="assets/pencil.svg"(click)="openModal(content)">
   </div>
   <div class="image-information__image">
-    <img src="{{src}}"/>
+    {{comments | json}}
+      <app-image-show-comments [comments]="image.comments"></app-image-show-comments>
   </div>
   <view-image-info class="image-information__imageInfo" [image]="image"></view-image-info>
 </div>
+
+<!--
+  MODAL - SWITCH SHOULD BE INDIVIDUAL COMPONENTS
+-->
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <h5 class="modal-title" id="modal-basic-title">Comment System</h5>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click'); closeModal()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
-      <app-image-preview></app-image-preview>
+    <div class="modal-body" [ngSwitch]="item">
+
+      <ng-container *ngSwitchCase="'view'">
+        <app-image-preview></app-image-preview>
+        <div>
+          <view-list-comments *ngIf="checkObjectProps(['comments'])(image) && image.comments.length > 0; else noComments" class="image-preview__comments" [comments]="image.comments"></view-list-comments>
+        </div>
+        <ng-template #noComments>
+          <h1>NO COMMENTS</h1>
+        </ng-template>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'text'">
+        <h3 class="modal-title pt-3" id="modal-basic-title">Add the comment</h3>
+        <div class="form-group my-5">
+          <label for="comment">Comment</label>
+          <textarea class="form-control" [(ngModel)]="comment" id="comment" rows="7"></textarea>
+        </div>
+        <div class="text-center m-auto w-50">
+          <button class="btn btn-success w-100" (click)="addComment(position, comment, author)" [disabled]="!position">Save Comment</button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'success'">
+          <h3 class="modal-title my-5" id="modal-basic-title">Comment added succesfully!</h3>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <h3 class="modal-title pt-3 text-center" id="modal-basic-title">Click to set the comment location</h3>
+        <app-image-preview  (canvasCommentAdded)="setPosition($event)"></app-image-preview>
+        <div class="text-center m-auto w-50">
+          <button class="btn btn-success w-100" (click)="addText()" [disabled]="!position">Next</button>
+        </div>
+      </ng-container>
+
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-    </div>
+
 </ng-template>

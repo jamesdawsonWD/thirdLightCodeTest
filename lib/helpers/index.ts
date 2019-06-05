@@ -14,4 +14,9 @@ checkObjectProps(['links', 'thumb'])(image) ? image.links.thumb : null;
 export const getImagePreview = (image: Image): string =>
 checkObjectProps(['links', 'thumb'])(image) ? image.links.thumb : null;
 
+export const getMousePosition = (canvas: HTMLCanvasElement, event: MouseEvent): Vector => {
+    const rect = canvas.getBoundingClientRect();
+    return new Vector(event.clientX - rect.left, event.clientY - rect.top);
+}
+
 export {ImageTL, Vector};

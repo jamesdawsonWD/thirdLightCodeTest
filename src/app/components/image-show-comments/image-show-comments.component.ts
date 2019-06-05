@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from "@angular/core";
 import { StoreService } from "@core/services/store.service";
 import { Vector, checkObjectProps, getMousePosition } from "@lib/helpers/";
 import { ImageComment } from "@lib/models";
@@ -8,11 +8,14 @@ export enum ClickOptions {
   Select
 }
 @Component({
-  selector: "app-image-preview",
-  templateUrl: "./image-preview.component.html"
+  selector: "app-image-show-comments",
+  templateUrl: "./image-show-comments.component.html",
+  styleUrls: ["./image-show-comments.component.sass"]
 })
-export class ImagePreviewComponent implements OnInit {
+export class ImageShowCommentsComponent implements OnInit, OnChanges {
   @Output() canvasCommentAdded = new EventEmitter<Vector>();
+  @Input() comments: ImageComment[] = [];
+
   public serverUrl: string = this.store.serverUrl;
   public image = this.store.getCurrentImage();
 
@@ -34,7 +37,7 @@ export class ImagePreviewComponent implements OnInit {
   constructor(private store: StoreService) {}
 
   ngOnInit() {
-    this.canvas = document.getElementById("preview") as HTMLCanvasElement;
+    this.canvas = document.getElementById("comments") as HTMLCanvasElement;
 
     this.canvas.height = 640;
     this.canvas.width = 640;
@@ -43,8 +46,28 @@ export class ImagePreviewComponent implements OnInit {
     const img = new Image();
 
     img.onload = () => {
-
       this.ctx.drawImage(img, 0, 0, 640, 640);
+
+      if (this.comments) {
+        for (const comment of this.comments) {
+          console.log(this.comments);
+          this.drawCommentLocation(
+            comment.position,
+            this.ctx,
+            this.canvas,
+            this.Config.border,
+            this.Config.size + 5
+          );
+
+          this.drawCommentLocation(
+            comment.position,
+            this.ctx,
+            this.canvas,
+            this.Config.colour,
+            this.Config.size
+          );
+        }
+      }
     };
 
     img.src = src;
@@ -53,39 +76,18 @@ export class ImagePreviewComponent implements OnInit {
     this.mouse = new Vector(innerWidth / 2, innerHeight / 2);
   }
 
-  public draw(
-    event: MouseEvent,
-    ctx: CanvasRenderingContext2D,
-    canvas: HTMLCanvasElement
-  ) {
+  public checkCommentClick(event: MouseEvent, comments: ImageComment[]) {
+    if (!comments.length) return;
 
-    const src = this.serverUrl + this.image.getLinks().preview;
-    const img = new Image();
+    const position = getMousePosition(this.canvas, event);
 
-    img.onload = () => {
-      const position = getMousePosition(canvas, event);
-
-      this.ctx.drawImage(img, 0, 0, 640, 640);
-
-      this.drawCommentLocation(
-        position,
-        ctx,
-        canvas,
-        this.Config.border,
-        this.Config.size + 5
-      );
-
-      this.drawCommentLocation(
-        position,
-        ctx,
-        canvas,
-        this.Config.colour,
-        this.Config.size
-      );
-    };
-
-    img.src = src;
+    for (let comment of comments) {
+      if (comment.position.distanceSq(position) < this.Config.size + 5) {
+        console.log('clicked');
+      }
+    }
   }
+
   private drawCommentLocation(
     position: Vector,
     ctx: CanvasRenderingContext2D,
@@ -93,16 +95,12 @@ export class ImagePreviewComponent implements OnInit {
     color: string,
     size: number
   ) {
-
     ctx.save();
     ctx.beginPath();
-
     ctx.translate(position.x, position.y);
-
     ctx.arc(0, 0, size, 0, Math.PI * 2, false);
     ctx.fillStyle = color;
     ctx.fill();
-
     ctx.closePath();
     ctx.restore();
 

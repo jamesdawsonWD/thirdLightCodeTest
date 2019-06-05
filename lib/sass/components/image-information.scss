@@ -35,7 +35,7 @@
     }
     &__image {
         margin: auto;
-        background: white;
+        background: var(--preview-bg--colour);
         padding: 100px 0;
         width: 100%;
         grid-area: image;
