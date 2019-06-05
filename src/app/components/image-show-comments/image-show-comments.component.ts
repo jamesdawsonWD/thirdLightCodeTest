@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { StoreService } from "@core/services/store.service";
 import { Vector, checkObjectProps, getMousePosition } from "@lib/helpers/";
 import { ImageComment } from "@lib/models";
@@ -12,7 +12,7 @@ export enum ClickOptions {
   templateUrl: "./image-show-comments.component.html",
   styleUrls: ["./image-show-comments.component.sass"]
 })
-export class ImageShowCommentsComponent implements OnInit, OnChanges {
+export class ImageShowCommentsComponent implements OnInit {
   @Output() canvasCommentAdded = new EventEmitter<Vector>();
   @Input() comments: ImageComment[] = [];
 
