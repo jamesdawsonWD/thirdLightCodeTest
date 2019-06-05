@@ -9,11 +9,12 @@ export enum ClickOptions {
 }
 @Component({
   selector: "app-image-show-comments",
-  templateUrl: "./image-show-comments.component.html",
+  templateUrl: "./image-show-comments.component.html"
 })
 export class ImageShowCommentsComponent implements OnInit {
   @Output() canvasCommentClicked = new EventEmitter<ImageComment>();
   @Input() comments: ImageComment[] = [];
+  @Input() showComments: boolean;
 
   public serverUrl: string = this.store.serverUrl;
   public image = this.store.getCurrentImage();
@@ -33,7 +34,7 @@ export class ImageShowCommentsComponent implements OnInit {
     size: 10
   };
 
-  constructor(private store: StoreService) { }
+  constructor(private store: StoreService) {}
 
   /**
    * The canvas for rendering all comments and emitting if a specific comment
@@ -51,11 +52,11 @@ export class ImageShowCommentsComponent implements OnInit {
 
     img.onload = () => {
       this.ctx.drawImage(img, 0, 0, 640, 640);
-
       // subscriber listen for changes to comments and re renders all comments
       this.store.currentComments$.subscribe(comments => {
-        // loads all comments
-        if (comments) {
+        this.ctx.drawImage(img, 0, 0, 640, 640);
+        if (comments && this.showComments) {
+          console.log(comments);
           for (const comment of this.comments) {
             this.drawCommentLocation(
               comment.position,
@@ -71,9 +72,10 @@ export class ImageShowCommentsComponent implements OnInit {
               this.Config.size
             );
           }
+        } else {
+          this.ctx.drawImage(img, 0, 0, 640, 640);
         }
-      })
-
+      });
     };
 
     img.src = src;
@@ -84,7 +86,7 @@ export class ImageShowCommentsComponent implements OnInit {
 
   public checkCommentClick(event: MouseEvent, comments: ImageComment[]) {
     if (!comments.length) return;
-    
+
     const position = getMousePosition(this.canvas, event);
 
     for (let comment of comments) {
@@ -108,6 +110,5 @@ export class ImageShowCommentsComponent implements OnInit {
     ctx.fill();
     ctx.closePath();
     ctx.restore();
-
   }
 }

@@ -1,3 +1,12 @@
-<p>{{comment.comment}}</p>
-<h1>{{comment.author}} - {{comment.created}}</h1>
-<h1>{{comment.position | json}}</h1>
+<div class="comment card">
+    <div class="comment__header mb-3">
+        <app-user-circle [color]="color" [initials]="comment.author.firstName.charAt(0) + comment.author.lastName.charAt(0)"></app-user-circle>
+        <div class="comment__nameDate ">
+            <h1>{{comment.author.firstName}} {{comment.author.lastName}}</h1>
+            <h4>{{comment.created | date}}</h4>
+        </div>
+    </div>
+    <div class="comment_text">
+        <p>{{comment.comment}}</p>
+    </div>
+</div>

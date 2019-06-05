@@ -1,17 +1,18 @@
-import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
-import { StoreService } from "@core/services/store.service";
-import { Vector, checkObjectProps, getMousePosition } from "@lib/helpers/";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Vector, checkObjectProps, getMousePosition } from '@lib/helpers/';
+import { StoreService } from '@core/services/store.service';
 
 export enum ClickOptions {
   Comment,
   Select
 }
 @Component({
-  selector: "app-image-preview",
-  templateUrl: "./image-preview.component.html"
+  selector: 'app-image-preview',
+  templateUrl: './image-preview.component.html'
 })
 export class ImagePreviewComponent implements OnInit {
   @Output() canvasCommentAdded = new EventEmitter<Vector>();
+
   public serverUrl: string = this.store.serverUrl;
   public image = this.store.getCurrentImage();
 
@@ -25,15 +26,15 @@ export class ImagePreviewComponent implements OnInit {
 
   // Canvas Config
   public Config = {
-    colour: "#fff",
-    border: "#2b374b",
+    colour: '#fff',
+    border: '#2b374b',
     size: 10
   };
 
   constructor(private store: StoreService) {}
 
   ngOnInit() {
-    this.canvas = document.getElementById("preview") as HTMLCanvasElement;
+    this.canvas = document.getElementById('preview') as HTMLCanvasElement;
 
     this.canvas.height = 640;
     this.canvas.width = 640;
@@ -42,13 +43,12 @@ export class ImagePreviewComponent implements OnInit {
     const img = new Image();
 
     img.onload = () => {
-
       this.ctx.drawImage(img, 0, 0, 640, 640);
     };
 
     img.src = src;
 
-    this.ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
+    this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
     this.mouse = new Vector(innerWidth / 2, innerHeight / 2);
   }
 
@@ -57,7 +57,6 @@ export class ImagePreviewComponent implements OnInit {
     ctx: CanvasRenderingContext2D,
     canvas: HTMLCanvasElement
   ) {
-
     const src = this.serverUrl + this.image.getLinks().preview;
     const img = new Image();
 
@@ -79,7 +78,7 @@ export class ImagePreviewComponent implements OnInit {
         this.Config.colour,
         this.Config.size
       );
-    
+
       this.canvasCommentAdded.emit(position);
     };
 
@@ -91,7 +90,6 @@ export class ImagePreviewComponent implements OnInit {
     color: string,
     size: number
   ) {
-
     ctx.save();
     ctx.beginPath();
     ctx.translate(position.x, position.y);

@@ -19,4 +19,6 @@ export const getMousePosition = (canvas: HTMLCanvasElement, event: MouseEvent): 
     return new Vector(event.clientX - rect.left, event.clientY - rect.top);
 }
 
+export const randomColorFromArray = (colors) => colors[Math.floor(Math.random() * colors.length)]
+
 export {ImageTL, Vector};

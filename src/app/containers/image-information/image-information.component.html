@@ -1,18 +1,19 @@
 <div class="image-information">
   <div class="image-information__header">
     <a [routerLink]="['']" ><h3>Back</h3></a>
-    <img class="pointer" src="assets/pencil.svg"(click)="openModal(content)">
+    <img class="pointer" src="assets/pencil.svg" (click)="openModal(content, 'add')" >
   </div>
   <div class="image-information__image">
-    {{comments | json}}
-      <app-image-show-comments [comments]="image.comments"></app-image-show-comments>
-  </div>
+      <app-image-show-comments class="image-information__image" (canvasCommentClicked)="openModalWithComment($event, content, 'single')" [showComments]="viewAll" [comments]="viewAll ? image.comments : []"></app-image-show-comments>
+      <div class="image-information__imageButtons">
+        <button class="btn btn-outline-gray" (click)="openModal(content, 'view')">View All Comments</button>
+        <button class="btn btn-outline-success" (click)="openModal(content, 'add')">Add comment</button>
+      </div>
+    </div>
   <view-image-info class="image-information__imageInfo" [image]="image"></view-image-info>
 </div>
 
-<!--
-  MODAL - SWITCH SHOULD BE INDIVIDUAL COMPONENTS
--->
+<!-- TODO: create individual components for each switch case-->
 <ng-template #content let-modal>
     <div class="modal-header">
       <h5 class="modal-title" id="modal-basic-title">Comment System</h5>
@@ -20,13 +21,17 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body" [ngSwitch]="item">
+    <div class="modal-body" [ngSwitch]="modalType">
 
       <ng-container *ngSwitchCase="'view'">
-        <app-image-preview></app-image-preview>
-        <div>
-          <view-list-comments *ngIf="checkObjectProps(['comments'])(image) && image.comments.length > 0; else noComments" class="image-preview__comments" [comments]="image.comments"></view-list-comments>
-        </div>
+          <view-list-comments *ngIf="image?.comments?.length > 0; else noComments" class="image-preview__comments" [comments]="image.comments"></view-list-comments>
+        <ng-template #noComments>
+          <h1>NO COMMENTS</h1>
+        </ng-template>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'single'">
+          <view-list-comments class="image-preview__comments" [comments]="singleComments"></view-list-comments>
         <ng-template #noComments>
           <h1>NO COMMENTS</h1>
         </ng-template>
@@ -39,16 +44,17 @@
           <textarea class="form-control" [(ngModel)]="comment" id="comment" rows="7"></textarea>
         </div>
         <div class="text-center m-auto w-50">
-          <button class="btn btn-success w-100" (click)="addComment(position, comment, author)" [disabled]="!position">Save Comment</button>
+          <button class="btn btn-success w-100" (click)="addComment(position, comment, image.getComments())" [disabled]="!position">Save Comment</button>
         </div>
       </ng-container>
 
       <ng-container *ngSwitchCase="'success'">
           <h3 class="modal-title my-5" id="modal-basic-title">Comment added succesfully!</h3>
       </ng-container>
+
       <ng-container *ngSwitchDefault>
         <h3 class="modal-title pt-3 text-center" id="modal-basic-title">Click to set the comment location</h3>
-        <app-image-preview  (canvasCommentAdded)="setPosition($event)"></app-image-preview>
+        <app-image-preview class="pointer"  (canvasCommentAdded)="setPosition($event)"></app-image-preview>
         <div class="text-center m-auto w-50">
           <button class="btn btn-success w-100" (click)="addText()" [disabled]="!position">Next</button>
         </div>

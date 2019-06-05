@@ -1,5 +1,9 @@
 import { Vector } from '@lib/helpers/vector';
-
+export interface User {
+  firstName: string;
+  lastName: string;
+  _id: string;
+}
 export interface ImageInfo {
     width: number | null;
     height: number | null;
@@ -29,8 +33,8 @@ export interface Image {
 
 export interface ImageComment {
   position: Vector;
-  author: string;
-  created: Date;
+  author: User;
+  created: Date | null;
   comment: string;
 }
 export interface Response<T> {

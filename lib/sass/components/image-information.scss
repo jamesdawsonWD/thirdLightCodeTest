@@ -39,7 +39,19 @@
         padding: 100px 0;
         width: 100%;
         grid-area: image;
+        cursor: pointer;
         text-align:center;
+        &Buttons {
+            width: 640px;
+            margin: auto;
+            display: flex;
+            justify-content: flex-end;
+            button{
+                margin-left: 20px ;
+                
+            }
+
+        }
         img {
             margin: auto 0;
         }

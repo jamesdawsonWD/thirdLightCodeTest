@@ -1,0 +1,14 @@
+$spacing: 14;
+.user-circle {
+    margin-right: $spacing * 1.3px;
+    width: $spacing * 5px;
+    height: $spacing * 5px;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 50%;
+}

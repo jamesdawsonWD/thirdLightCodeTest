@@ -1,0 +1,12 @@
+.comment {
+    display: grid;
+    padding: 20px;  
+
+    &__header {
+        grid-template-columns: 100px auto;
+        display: grid;
+    }
+    &__text {
+        font-size: 22px;
+    }
+}
