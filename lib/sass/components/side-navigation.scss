@@ -12,6 +12,15 @@
         margin:auto;
 
     }
+    &__github {
+        color: var(--font-colour);
+        &:hover {
+            color: var(--main-primary-colour);
+        }
+        img {
+            max-width:75px;
+        }
+    }
     &__description {
         color: var(--font-colour);
         margin: 30px;
