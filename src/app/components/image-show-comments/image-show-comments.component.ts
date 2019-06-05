@@ -10,10 +10,9 @@ export enum ClickOptions {
 @Component({
   selector: "app-image-show-comments",
   templateUrl: "./image-show-comments.component.html",
-  styleUrls: ["./image-show-comments.component.sass"]
 })
 export class ImageShowCommentsComponent implements OnInit {
-  @Output() canvasCommentAdded = new EventEmitter<Vector>();
+  @Output() canvasCommentClicked = new EventEmitter<ImageComment>();
   @Input() comments: ImageComment[] = [];
 
   public serverUrl: string = this.store.serverUrl;
@@ -34,11 +33,16 @@ export class ImageShowCommentsComponent implements OnInit {
     size: 10
   };
 
-  constructor(private store: StoreService) {}
+  constructor(private store: StoreService) { }
 
+  /**
+   * The canvas for rendering all comments and emitting if a specific comment
+   * has been clicked
+   */
   ngOnInit() {
     this.canvas = document.getElementById("comments") as HTMLCanvasElement;
 
+    // set the Canvas
     this.canvas.height = 640;
     this.canvas.width = 640;
 
@@ -48,26 +52,28 @@ export class ImageShowCommentsComponent implements OnInit {
     img.onload = () => {
       this.ctx.drawImage(img, 0, 0, 640, 640);
 
-      if (this.comments) {
-        for (const comment of this.comments) {
-          console.log(this.comments);
-          this.drawCommentLocation(
-            comment.position,
-            this.ctx,
-            this.canvas,
-            this.Config.border,
-            this.Config.size + 5
-          );
+      // subscriber listen for changes to comments and re renders all comments
+      this.store.currentComments$.subscribe(comments => {
+        // loads all comments
+        if (comments) {
+          for (const comment of this.comments) {
+            this.drawCommentLocation(
+              comment.position,
+              this.ctx,
+              this.Config.border,
+              this.Config.size + 5
+            );
 
-          this.drawCommentLocation(
-            comment.position,
-            this.ctx,
-            this.canvas,
-            this.Config.colour,
-            this.Config.size
-          );
+            this.drawCommentLocation(
+              comment.position,
+              this.ctx,
+              this.Config.colour,
+              this.Config.size
+            );
+          }
         }
-      }
+      })
+
     };
 
     img.src = src;
@@ -78,12 +84,12 @@ export class ImageShowCommentsComponent implements OnInit {
 
   public checkCommentClick(event: MouseEvent, comments: ImageComment[]) {
     if (!comments.length) return;
-
+    
     const position = getMousePosition(this.canvas, event);
 
     for (let comment of comments) {
-      if (comment.position.distanceSq(position) < this.Config.size + 5) {
-        console.log('clicked');
+      if (comment.position.distanceSq(position) < this.Config.size + 100) {
+        this.canvasCommentClicked.emit(comment);
       }
     }
   }
@@ -91,7 +97,6 @@ export class ImageShowCommentsComponent implements OnInit {
   private drawCommentLocation(
     position: Vector,
     ctx: CanvasRenderingContext2D,
-    canvas: HTMLCanvasElement,
     color: string,
     size: number
   ) {
@@ -104,6 +109,5 @@ export class ImageShowCommentsComponent implements OnInit {
     ctx.closePath();
     ctx.restore();
 
-    this.canvasCommentAdded.emit(position);
   }
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HTTPservice } from './http.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '@environments/environment';
-import { Image } from '@lib/models';
+import { Image, ImageComment } from '@lib/models';
 import { ImageTL } from '@lib/helpers';
 
 export interface User {
@@ -13,15 +13,20 @@ export interface User {
 @Injectable()
 export class StoreService {
     readonly serverUrl = environment.serverUrl;
+    
     private currentImage: ImageTL;
-    private allImages$: Observable<Image[]> = this.http.getAllImages();
     private previewSize = environment.preview;
+    
+    private allImages$: Observable<Image[]> = this.http.getAllImages();
+    public currentComments$ = new Subject();
+
     private user = {
         firstName: 'James',
         lastName: 'Dawson',
         _id: '1'
     }
     constructor(private http: HTTPservice) {
+        this.nextCurrentComment([]);
     }
 
     public getUser(): User {
@@ -59,5 +64,8 @@ export class StoreService {
             [],
         );
         console.log(this.currentImage);
+    }
+    public nextCurrentComment(array: ImageComment[]) {
+        this.currentComments$.next(array);
     }
 }

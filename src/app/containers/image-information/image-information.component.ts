@@ -40,6 +40,7 @@ export class ImageInformationComponent {
     const comments = this.image.getComments();
     comments.push(this.createComment(position, comment, author));
     this.item = "view";
+    this.store.nextCurrentComment(comments);
   }
 
   public closeModal() {

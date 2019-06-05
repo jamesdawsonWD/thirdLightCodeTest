@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { StoreService } from "@core/services/store.service";
 import { Vector, checkObjectProps, getMousePosition } from "@lib/helpers/";
-import { ImageComment } from "@lib/models";
 
 export enum ClickOptions {
   Comment,
@@ -65,12 +64,11 @@ export class ImagePreviewComponent implements OnInit {
     img.onload = () => {
       const position = getMousePosition(canvas, event);
 
-      this.ctx.drawImage(img, 0, 0, 640, 640);
+      ctx.drawImage(img, 0, 0, 640, 640);
 
       this.drawCommentLocation(
         position,
         ctx,
-        canvas,
         this.Config.border,
         this.Config.size + 5
       );
@@ -78,10 +76,11 @@ export class ImagePreviewComponent implements OnInit {
       this.drawCommentLocation(
         position,
         ctx,
-        canvas,
         this.Config.colour,
         this.Config.size
       );
+    
+      this.canvasCommentAdded.emit(position);
     };
 
     img.src = src;
@@ -89,23 +88,17 @@ export class ImagePreviewComponent implements OnInit {
   private drawCommentLocation(
     position: Vector,
     ctx: CanvasRenderingContext2D,
-    canvas: HTMLCanvasElement,
     color: string,
     size: number
   ) {
 
     ctx.save();
     ctx.beginPath();
-
     ctx.translate(position.x, position.y);
-
     ctx.arc(0, 0, size, 0, Math.PI * 2, false);
     ctx.fillStyle = color;
     ctx.fill();
-
     ctx.closePath();
     ctx.restore();
-
-    this.canvasCommentAdded.emit(position);
   }
 }
